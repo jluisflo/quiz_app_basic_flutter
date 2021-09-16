@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/widgets/quiz/quiz.dart';
+import 'package:quiz_app/widgets/quiz/restart.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,8 +24,12 @@ class _MyAppState extends State<MyApp> {
     }
   ];
 
-  _nextQuestion() => setState(() {
+  nextQuestion() => setState(() {
         questionIndex++;
+      });
+
+  restartQuiz() => setState(() {
+        questionIndex = 0;
       });
 
   @override
@@ -37,8 +42,8 @@ class _MyAppState extends State<MyApp> {
           body: (questionIndex < questionList.length)
               ? Quiz(
                   question: questionList[questionIndex],
-                  checkHandler: _nextQuestion)
-              : Text('You did it!')),
+                  checkHandler: nextQuestion)
+              : Restart(restartHandler: restartQuiz)),
     );
   }
 }
