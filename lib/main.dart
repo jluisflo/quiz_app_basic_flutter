@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/widgets/answer.dart';
-import 'package:quiz_app/widgets/questions.dart';
+import 'package:quiz_app/widgets/quiz/quiz.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,16 +11,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int _questionIndex = 0;
-  var _questionList = [
-    'Questions 1',
-    'Questions 2',
-    'Questions 3',
-    'Questions 4',
+  int questionIndex = 0;
+  List<Map<String, Object>> questionList = [
+    {
+      'question': 'What is the most popular system operative inthe world?',
+      'options': ['windows']
+    },
+    {
+      'question': 'The most programing lenaguage use in 2021 is?',
+      'options': ['js', 'python']
+    }
   ];
 
   _nextQuestion() => setState(() {
-        if (_questionIndex < _questionList.length - 1) _questionIndex++;
+        questionIndex++;
       });
 
   @override
@@ -31,14 +34,11 @@ class _MyAppState extends State<MyApp> {
           appBar: AppBar(
             title: Text('Quiz App'),
           ),
-          body: Column(
-            children: [
-              Question(
-                question: _questionList[_questionIndex].toString(),
-              ),
-              Answer(checkHandler: _nextQuestion)
-            ],
-          )),
+          body: (questionIndex < questionList.length)
+              ? Quiz(
+                  question: questionList[questionIndex],
+                  checkHandler: _nextQuestion)
+              : Text('You did it!')),
     );
   }
 }
