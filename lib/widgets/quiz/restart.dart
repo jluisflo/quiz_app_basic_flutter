@@ -2,8 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Restart extends StatelessWidget {
-  final Function() restartHandler;
+  final Function restartHandler;
   Restart({required this.restartHandler});
+
+  void restart() {
+    restartHandler();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +19,7 @@ class Restart extends StatelessWidget {
               'You did it!',
               style: TextStyle(fontSize: 25),
             ),
-            ElevatedButton(onPressed: restartHandler, child: Text('Restart'))
+            ElevatedButton(onPressed: restart, child: Text('Restart'))
           ],
         ));
   }

@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:quiz_app/widgets/quiz/answer.dart';
+import 'package:quiz_app/widgets/quiz/answers.dart';
 import 'package:quiz_app/widgets/quiz/questions.dart';
 
 class Quiz extends StatelessWidget {
   final Map<String, Object> question;
-  final Function() checkHandler;
+  final Function checkHandler;
 
   Quiz({
     required this.question,
@@ -20,8 +20,8 @@ class Quiz extends StatelessWidget {
           question: question['question'].toString(),
         ),
         Answer(
-            answers: question['options'] as List<String>,
-            checkHandler: checkHandler)
+            answers: question['options'] as List<Map<String, Object>>,
+            checkHandler: checkHandler),
       ],
     ));
   }
